@@ -2,6 +2,9 @@ processes: 5
 dispatcher: tcp://127.0.0.1:5555
 nameServers:
   - 127.0.0.1
+httpLists:
+  # yahoo.com X(
+  - https://help.yahoo.com/kb/postmaster/yahoo-outbound-ip-addresses-sln23997.html?impressions=true
 spfDomains:
   - microsoft.com
   - apple.com
