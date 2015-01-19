@@ -1,10 +1,18 @@
-processes: 5
+processes: 10
 dispatcher: tcp://127.0.0.1:5555
 nameServers:
   - 127.0.0.1
 httpLists:
   # yahoo.com X(
   - https://help.yahoo.com/kb/postmaster/yahoo-outbound-ip-addresses-sln23997.html?impressions=true
+  # Office 365
+  - http://technet.microsoft.com/library/hh373144.aspx
+  # Forefront Online Protection for Exchange Online IP Addresses
+  - http://technet.microsoft.com/en-us/library/hh510075.aspx
+  #Exchange Online Protection IP addresses
+  - http://technet.microsoft.com/library/dn163583(v=exchg.150).aspx
+  # aol.com
+  - http://postmaster.aol.com/Postmaster.OMRs.php
 spfDomains:
   - microsoft.com
   - apple.com
