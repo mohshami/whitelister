@@ -1,0 +1,47 @@
+processes: 5
+dispatcher: tcp://127.0.0.1:5555
+nameServers:
+  - 127.0.0.1
+spfDomains:
+  - microsoft.com
+  - apple.com
+  - amazon.com
+  - ebay.com
+  - gmx.net
+  - google.com
+  - hotmail.com
+  - livejournal.com
+  - emailsrvr.com
+  - twitter.com
+  - cmail1.com
+  - steampowered.com
+  - rackspace.com
+  - startcom.org
+  - github.com
+  - verio.net
+  - verio.com
+  - mtn.co.ug
+  - spf-corp.truemail.co.th
+  - arvixe.com
+  - qatarairways.com.qa
+  - b2b-mail.net
+  - nic.net.sa
+  - kacst.edu.sa
+  - palaw.com.cy
+  - baeshen.com
+  - bigpond.com
+  - ezweb.ne.jp
+  - statesville.net
+  - economy.ae
+  - _spf.cleanport.com
+  - sendmails.me
+  - indosat.net.id
+  - barracuda.com
+  - pushover.net
+  - proxpn.com
+  - cactusvpn.com
+  - returnpath.net
+  - unlocktheinbox.com
+  - ovh.com
+  - mandrill.com
+  - aol.com
