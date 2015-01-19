@@ -7,6 +7,7 @@ import msgpack
 from ConfigLoader import ConfigLoader
 from SPFFinder import SPFFinder
 
+
 def RBLworker(**kwargs):
 	settings = kwargs['settings']
 
@@ -37,7 +38,6 @@ def RBLworker(**kwargs):
 		# Now we just return empty sets so we can check for any potential issues
 		# if len(ips) > 0:
 		prevResult = msgpack.packb([domain, ips])
-
 
 
 def main():
