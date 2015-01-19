@@ -43,7 +43,7 @@ def RBLworker(**kwargs):
 def main():
 	IPs = dict()
 	# Get settings from configuration file
-	settings = ConfigLoader.load(__file__, 'spf_whitelist.cf')
+	settings = ConfigLoader.load(__file__, 'whitelist.cf')
 
 	# Prepare the dispatcher socket
 	context = zmq.Context()
