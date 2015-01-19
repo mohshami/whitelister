@@ -33,7 +33,9 @@ def RBLworker(**kwargs):
 			break
 
 		ips = SPFFinder.getIPs(domain, settings)
-		#if len(ips) > 0:
+		# At first, the script checked if the returned set of IPs is empty
+		# Now we just return empty sets so we can check for any potential issues
+		# if len(ips) > 0:
 		prevResult = msgpack.packb([domain, ips])
 
 
