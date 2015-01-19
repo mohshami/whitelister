@@ -8,8 +8,6 @@ import urllib2
 import re
 from ConfigLoader import ConfigLoader
 
-import time
-
 
 def getIPs(url):
 	# Get the html for the page containing the list of CIDRs
@@ -59,8 +57,6 @@ def HTTPworker(**kwargs):
 		prevResult = msgpack.packb([url, ips])
 
 def main():
-	stime = time.time()
-
 	IPs = dict()
 
 	# Get settings from configuration file
@@ -113,7 +109,6 @@ def main():
 		for IP in ips[1]:
 			print IP
 
-	print time.time() - stime
 
 if __name__ == '__main__':
 	main()
