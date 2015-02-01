@@ -40,9 +40,6 @@ def HTTPworker(**kwargs):
 		# Inform the dispatcher that we are ready
 		worker.send_multipart([b"ready", prevResult])
 
-		# Reset the previous result value
-		prevResult = ''
-
 		# Get the IP and RBL
 		url = worker.recv()
 
