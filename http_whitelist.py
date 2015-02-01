@@ -9,7 +9,7 @@ import re
 from ConfigLoader import ConfigLoader
 
 
-def getIPs(url):
+def getIPsHTTP(url):
 	# Get the html for the page containing the list of CIDRs
 	response = urllib2.urlopen(url)
 	html = response.read()
@@ -40,18 +40,18 @@ def worker(**kwargs):
 		# Inform the dispatcher that we are ready
 		workerSocket.send_multipart([b"ready", prevResult])
 
-		# Get the IP and RBL
-		url = workerSocket.recv()
+		# Get the IP/Whitelist page and RBL
+		request = workerSocket.recv()
 
 		# Check if this was a terminate, if so, exit the loop and terminate
-		if url == 'term':
+		if request == 'term':
 			break
-
-		ips = getIPs(url)
-		# At first, the script checked if the returned set of IPs is empty
-		# Now we just return empty sets so we can check for any potential issues
-		# if len(ips) > 0:
-		prevResult = msgpack.packb([url, ips])
+		elif request[:4] == 'http':
+			ips = getIPsHTTP(request)
+			# At first, the script checked if the returned set of IPs is empty
+			# Now we just return empty sets so we can check for any potential issues
+			# if len(ips) > 0:
+			prevResult = msgpack.packb([request, ips])
 
 def main():
 	IPs = dict()
