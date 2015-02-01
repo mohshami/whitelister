@@ -25,23 +25,23 @@ def getIPs(url):
 	return matches
 
 
-def HTTPworker(**kwargs):
+def worker(**kwargs):
 	settings = kwargs['settings']
 
 	# Prepare pull socket
 	context = zmq.Context()
-	worker = context.socket(zmq.REQ)
-	worker.connect(settings['dispatcher'])
+	workerSocket = context.socket(zmq.REQ)
+	workerSocket.connect(settings['dispatcher'])
 
 	prevResult = ''
 
 	# Read RBL list from socket
 	while True:
 		# Inform the dispatcher that we are ready
-		worker.send_multipart([b"ready", prevResult])
+		workerSocket.send_multipart([b"ready", prevResult])
 
 		# Get the IP and RBL
-		url = worker.recv()
+		url = workerSocket.recv()
 
 		# Check if this was a terminate, if so, exit the loop and terminate
 		if url == 'term':
@@ -67,7 +67,7 @@ def main():
 	# Start the worker processes
 	processes = []
 	for thread in xrange(settings['processes']):
-		p = multiprocessing.Process(target=HTTPworker, kwargs={'settings': settings})
+		p = multiprocessing.Process(target=worker, kwargs={'settings': settings})
 		processes.append(p)
 		p.start()
 
