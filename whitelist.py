@@ -7,7 +7,7 @@ import msgpack
 import urllib2
 import re
 from ConfigLoader import ConfigLoader
-
+from SPFFinder import SPFFinder
 
 def getIPsHTTP(url):
 	# Get the html for the page containing the list of CIDRs
@@ -48,10 +48,13 @@ def worker(**kwargs):
 			break
 		elif request[:4] == 'http':
 			ips = getIPsHTTP(request)
-			# At first, the script checked if the returned set of IPs is empty
-			# Now we just return empty sets so we can check for any potential issues
-			# if len(ips) > 0:
-			prevResult = msgpack.packb([request, ips])
+		else:
+			ips = SPFFinder.getIPs(request, settings)
+
+		# At first, the script checked if the returned set of IPs is empty
+		# Now we just return empty sets so we can check for any potential issues
+		# if len(ips) > 0:
+		prevResult = msgpack.packb([request, ips])
 
 def main():
 	IPs = dict()
@@ -72,7 +75,7 @@ def main():
 		p.start()
 
 	# Send jobs to the active threads
-	for url in settings['httpLists']:
+	for url in settings['httpLists'] + settings['spfDomains']:
 		# LRU worker is next waiting in the queue
 		address, empty, ready, prevResult = dispatcher.recv_multipart()
 
